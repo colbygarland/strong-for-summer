@@ -83,8 +83,10 @@ export default function Home() {
         <H3>2 Points</H3>
         <Activity>🛏️ Make the bed</Activity>
       </Group>
-      <H3>1 Point</H3>
-      <Activity>🍃 Go outside</Activity>
+      <Group>
+        <H3>1 Point</H3>
+        <Activity>🍃 Go outside</Activity>
+      </Group>
     </Page>
   );
 }
