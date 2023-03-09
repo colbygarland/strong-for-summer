@@ -31,7 +31,7 @@ export default function AddQuote() {
             placeholder="Enter a quote"
             value={quote}
             onChange={(e) => {
-              setQ(e.target.value.trim());
+              setQ(e.target.value);
             }}
           />
           <Button onClick={onSubmit}>Submit</Button>
