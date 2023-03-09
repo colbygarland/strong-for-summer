@@ -14,15 +14,11 @@ import { HiCalendar } from 'react-icons/hi';
 import styled from 'styled-components';
 import { FormBlock, Label } from '../components/forms/shared';
 import { Header } from '../components/Header';
+import { Page } from '../components/Page';
 import { Quote } from '../components/Quote';
 import { getActivity, setActivity } from '../services/api/activity';
 import { colors } from '../theme/colors';
 import { getCurrentDate, getCurrentDatePretty } from '../utils/date';
-
-const Page = styled.div`
-  padding-left: 20px;
-  padding-right: 20px;
-`;
 
 const H2 = styled.h2`
   font-size: 32px;

@@ -1,14 +1,8 @@
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { Header } from '../components/Header';
+import { Page } from '../components/Page';
 import { ACTIVITIES, getLeaderboard } from '../services/api/activity';
-
-const Page = styled.div`
-  min-height: 100vh;
-  padding-left: 20px;
-  padding-right: 20px;
-`;
 
 // @ts-ignore
 function filterObject(obj, cb) {
