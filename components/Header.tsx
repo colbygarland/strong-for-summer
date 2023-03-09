@@ -102,6 +102,9 @@ export const Header = ({
           <MenuItem>
             <Link href="/leaderboard">Leaderboard</Link>
           </MenuItem>
+          <MenuItem>
+            <Link href="/add-quote">Add a Quote</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Container>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FormBlock } from '../components/forms/shared';
 import { Header } from '../components/Header';
+import { Quote } from '../components/Quote';
 import { getActivity, setActivity } from '../services/api/activity';
 import { colors } from '../theme/colors';
 import { getCurrentDatePretty } from '../utils/date';
@@ -63,6 +64,7 @@ export default function Home() {
     <>
       <Header pageTitle="Strong For Summer 💪" />
       <Page>
+        <Quote />
         <H2>{getCurrentDatePretty()}</H2>
         <Group>
           <H3>20 Points</H3>
