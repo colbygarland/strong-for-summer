@@ -26,6 +26,7 @@ const MenuButton = styled(HiOutlineMenuAlt3).attrs({ size: 30 })`
   position: absolute;
   right: 20px;
   top: 15px;
+  cursor: pointer;
 `;
 
 const LeftActionButton = styled.span`
@@ -62,6 +63,7 @@ const CloseButton = styled(HiOutlineX).attrs({ size: 30 })`
   position: absolute;
   top: 20px;
   right: 20px;
+  cursor: pointer;
 `;
 
 const MenuList = styled.ul`

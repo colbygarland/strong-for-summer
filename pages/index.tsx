@@ -30,6 +30,11 @@ const Group = styled.div`
   margin-bottom: 30px;
 `;
 
+const Span = styled.span`
+  text-decoration: line-through;
+  opacity: 0.45;
+`;
+
 function Activity({ children }: { children: string }) {
   const [checked, setChecked] = useState(false);
 
@@ -48,7 +53,7 @@ function Activity({ children }: { children: string }) {
           setActivity(children, e.target.checked);
         }}
       >
-        {children}
+        {checked ? <Span>{children}</Span> : children}
       </Checkbox>
     </FormBlock>
   );

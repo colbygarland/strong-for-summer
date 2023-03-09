@@ -10,6 +10,11 @@ const Page = styled.div`
   padding-right: 20px;
 `;
 
+// @ts-ignore
+function filterObject(obj, cb) {
+  return Object.fromEntries(Object.entries(obj).filter(([key, val]) => cb(val, key)));
+}
+
 export default function Leaderboard() {
   const [rankings, setRankings] = useState([{}]);
 
@@ -21,7 +26,9 @@ export default function Leaderboard() {
         // @ts-ignore
         for (const [_date, activities] of Object.entries(values)) {
           // @ts-ignore
-          Object.keys(activities).forEach((key) => {
+          const filtered = filterObject(activities, (val, key) => val.completed);
+          // @ts-ignore
+          Object.keys(filtered).forEach((key) => {
             // add up all the keys here
             points += ACTIVITIES[key].points;
           });
