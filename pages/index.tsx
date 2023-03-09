@@ -5,6 +5,7 @@ import { FormBlock } from '../components/forms/shared';
 import { Header } from '../components/Header';
 import { getActivity, setActivity } from '../services/api/activity';
 import { colors } from '../theme/colors';
+import { getCurrentDatePretty } from '../utils/date';
 
 const Page = styled.div`
   background-color: ${colors.primary};
@@ -58,7 +59,7 @@ export default function Home() {
   return (
     <Page>
       <Header pageTitle="Strong For Summer 💪" />
-      <H2>March 8th</H2>
+      <H2>{getCurrentDatePretty()}</H2>
       <Group>
         <H3>20 Points</H3>
         <Activity>🏋️ 45 minute workout</Activity>

@@ -12,6 +12,11 @@ export const getCurrentDate = () => {
   return formatDate(getNow());
 };
 
+export const getCurrentDatePretty = () => {
+  const now = getNow();
+  return now.toDateString();
+};
+
 export const getCurrentMonth = () => {
   const currentDate = getCurrentDate().split('-');
   return `${currentDate[0]}-${currentDate[1]}`;
