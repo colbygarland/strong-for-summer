@@ -69,7 +69,7 @@ export default function EnterName() {
         <Input
           type="text"
           onChange={(e) => {
-            setName(e.target.value);
+            setName(e.target.value.trim());
           }}
         />
         <Button onClick={onSubmit}>Submit</Button>
