@@ -58,7 +58,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <H1>
           Strong <br />
           for <br />
-          Summer 💪
+          Summer <br />
+          💪
         </H1>
       </Page>
     );
