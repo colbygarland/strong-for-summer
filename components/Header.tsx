@@ -10,13 +10,14 @@ import Link from 'next/link';
 const Container = styled.header`
   background: ${colors.primary};
   padding: ${spacing.sm};
-  margin-bottom: 40px;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
 `;
 
 const Title = styled.h2`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
 `;
 
@@ -24,7 +25,7 @@ const MenuButton = styled(HiOutlineMenuAlt3).attrs({ size: 30 })`
   fill: ${colors.white};
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 15px;
 `;
 
 const LeftActionButton = styled.span`
@@ -40,7 +41,7 @@ const Menu = styled.div<{ show?: boolean }>`
   height: 100%;
   width: 100%;
   background: ${colors.white};
-  color: ${colors.primary};
+  color: ${colors.secondary};
   z-index: ${zIndex[50]};
   padding: ${spacing.lg};
   transition: 0.3s;
@@ -71,6 +72,7 @@ const MenuList = styled.ul`
 
 const MenuItem = styled.li`
   margin-bottom: 15px;
+  font-weight: 700;
 `;
 
 export const Header = ({

@@ -1,3 +1,18 @@
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const formatDate = (date: Date) => {
   return date.toISOString().split('T')[0];
 };
@@ -14,7 +29,7 @@ export const getCurrentDate = () => {
 
 export const getCurrentDatePretty = () => {
   const now = getNow();
-  return now.toDateString();
+  return `${monthNames[now.getMonth()]} ${now.getDate()}`;
 };
 
 export const getCurrentMonth = () => {
@@ -31,20 +46,6 @@ export const getEndOfMonth = (date: string) => {
   return formatDate(new Date(d.getFullYear(), d.getMonth() + 2, 0));
 };
 
-const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
 export const getMonthName = (date: string) => {
   const month = Number(date.split('-')[1]);
   return monthNames[month - 1];

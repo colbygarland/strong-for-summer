@@ -8,18 +8,17 @@ import { Loader } from '../components/Loader';
 import { colors } from '../theme/colors';
 
 const Page = styled.div`
-  background-color: ${colors.primary};
   min-height: 100vh;
-  color: ${colors.white};
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 20px;
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   text-align: center;
+  color: ${colors.primary};
 `;
 
 const StyledFormBlock = styled(FormBlock)`

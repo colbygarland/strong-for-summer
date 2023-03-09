@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { colors } from '../theme/colors';
 
 const PrimaryButton = styled.button`
-  color: #844c78;
-  background-color: ${colors.tertiary};
+  color: ${colors.white};
+  background-color: ${colors.secondary};
   border-radius: 30px;
   padding: 8px 20px;
   font-size: 18px;
