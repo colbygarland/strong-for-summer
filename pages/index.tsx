@@ -15,8 +15,19 @@ const Page = styled.div`
 `;
 
 const H2 = styled.h2`
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 15px;
+  font-weight: 700;
+`;
+
+const H3 = styled.h3`
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 700;
+`;
+
+const Group = styled.div`
+  margin-bottom: 30px;
 `;
 
 function Activity({ children }: { children: string }) {
@@ -48,19 +59,32 @@ export default function Home() {
     <Page>
       <Header pageTitle="Strong For Summer 💪" />
       <H2>March 8th</H2>
-      <Activity>45 minute workout</Activity>
-      <Activity>8 cups of water</Activity>
-      <Activity>10,000 steps</Activity>
-      <Activity>3 servings of vegetables</Activity>
-      <Activity>Activity or class</Activity>
-      <Activity>4 cups of water</Activity>
-      <Activity>7,000 steps</Activity>
-      <Activity>5 minutes of meditation</Activity>
-      <Activity>Read 10 pages of a book</Activity>
-      <Activity>Get 8 hours of sleep</Activity>
-      <Activity>Hit your protein goal</Activity>
-      <Activity>Make the bed</Activity>
-      <Activity>Go outside</Activity>
+      <Group>
+        <H3>20 Points</H3>
+        <Activity>🏋️ 45 minute workout</Activity>
+      </Group>
+      <Group>
+        <H3>10 Points</H3>
+        <Activity>💦 8 cups of water</Activity>
+        <Activity>🏃‍♂️ 10,000 steps</Activity>
+        <Activity>🥗 3 servings of vegetables</Activity>
+        <Activity>🧘 Activity or class</Activity>
+      </Group>
+      <Group>
+        <H3>5 Points</H3>
+        <Activity>💦 4 cups of water</Activity>
+        <Activity>🏃‍♂️ 7,000 steps</Activity>
+        <Activity>🧘 5 minutes of meditation</Activity>
+        <Activity>📖 Read 10 pages of a book</Activity>
+        <Activity>💤 Get 8 hours of sleep</Activity>
+        <Activity>💪 Hit your protein goal</Activity>
+      </Group>
+      <Group>
+        <H3>2 Points</H3>
+        <Activity>🛏️ Make the bed</Activity>
+      </Group>
+      <H3>1 Point</H3>
+      <Activity>🍃 Go outside</Activity>
     </Page>
   );
 }
