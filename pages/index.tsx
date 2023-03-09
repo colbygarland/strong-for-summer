@@ -8,7 +8,6 @@ import { colors } from '../theme/colors';
 import { getCurrentDatePretty } from '../utils/date';
 
 const Page = styled.div`
-  min-height: 100vh;
   padding-left: 20px;
   padding-right: 20px;
 `;
