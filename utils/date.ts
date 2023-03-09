@@ -17,8 +17,8 @@ const formatDate = (date: Date) => {
   return date.toISOString().split('T')[0];
 };
 
-const getNow = (): Date => {
-  let now = new Date();
+export const getNow = (): Date => {
+  const now = new Date();
   const offset = now.getTimezoneOffset();
   return new Date(now.getTime() - offset * 60 * 1000);
 };
@@ -27,9 +27,12 @@ export const getCurrentDate = () => {
   return formatDate(getNow());
 };
 
-export const getCurrentDatePretty = () => {
-  const now = getNow();
-  return `${monthNames[now.getMonth()]} ${now.getDate()}`;
+export const getCurrentDatePretty = (date: string) => {
+  const d = date.split('-');
+  // @ts-ignore
+  const month = monthNames[d[1] - 1];
+  const day = parseInt(d[2]);
+  return `${month} ${day}`;
 };
 
 export const getCurrentMonth = () => {

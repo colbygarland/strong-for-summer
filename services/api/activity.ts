@@ -1,5 +1,4 @@
 import { child, get, ref, set, getDatabase } from 'firebase/database';
-import { getCurrentDate } from '../../utils/date';
 import { getUser } from '../../utils/user';
 
 export const ACTIVITIES = {
@@ -45,11 +44,10 @@ export const ACTIVITIES = {
 };
 
 const db = getDatabase();
-const today = getCurrentDate();
 
-export const getActivity = async (name: string) => {
+export const getActivity = async (name: string, date: string) => {
   const user = getUser();
-  const snapshot = await get(child(ref(db), `/activities/${user}/${today}/${name}`));
+  const snapshot = await get(child(ref(db), `/activities/${user}/${date}/${name}`));
   if (snapshot.exists()) {
     return Boolean(snapshot.val().completed);
   } else {
@@ -57,9 +55,9 @@ export const getActivity = async (name: string) => {
   }
 };
 
-export const setActivity = async (name: string, completed: boolean) => {
+export const setActivity = async (name: string, date: string, completed: boolean) => {
   const user = getUser();
-  set(ref(db, `/activities/${user}/${today}/${name}`), {
+  set(ref(db, `/activities/${user}/${date}/${name}`), {
     completed,
   });
 };
