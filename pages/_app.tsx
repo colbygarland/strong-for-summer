@@ -15,7 +15,8 @@ const montserrat = Montserrat({ weight: ['400', '700'], subsets: ['latin'] });
 const Page = styled.div`
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const H1 = styled.h1`
