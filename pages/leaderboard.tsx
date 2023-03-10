@@ -1,7 +1,8 @@
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
-import { GetStaticProps } from 'next';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Header } from '../components/Header';
+import { Loader } from '../components/Loader';
 import { Page } from '../components/Page';
 import { ACTIVITIES, getLeaderboard } from '../services/api/activity';
 
@@ -13,6 +14,11 @@ function filterObject(obj, cb) {
 const StyledAward = styled.span`
   display: inline-block;
   margin-left: 6px;
+`;
+
+const LoaderContainer = styled.div`
+  display: grid;
+  place-items: center;
 `;
 
 function Award({ place }: { place: number }) {
@@ -33,62 +39,69 @@ function Award({ place }: { place: number }) {
   return <StyledAward>{emoji}</StyledAward>;
 }
 
-export default function Leaderboard({ rankings }: { rankings: { [key: string]: number }[] }) {
+export default function Leaderboard() {
+  const [rankings, setRankings] = useState<{ [key: string]: number }[] | null>(null);
+
+  useEffect(() => {
+    getLeaderboard().then((data) => {
+      const ranks = [];
+      for (const [user, values] of Object.entries(data)) {
+        let points = 0;
+        // @ts-ignore
+        for (const [_date, activities] of Object.entries(values)) {
+          // @ts-ignore
+          const filtered = filterObject(activities, (val, key) => val.completed);
+          // @ts-ignore
+          Object.keys(filtered).forEach((key) => {
+            // add up all the keys here
+            points += ACTIVITIES[key].points;
+          });
+        }
+        ranks.push({ [user]: points });
+      }
+      ranks.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
+      setRankings(ranks);
+    });
+  }, []);
+
   return (
     <>
       <Header pageTitle="Leaderboard" />
       <Page>
-        <TableContainer>
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Person</Th>
-                <Th>Points</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {rankings.map((rank, index) => {
-                const user = Object.keys(rank);
-                return (
-                  <Tr key={index}>
-                    <Td>{user}</Td>
-                    <Td>
-                      {/* @ts-ignore */}
-                      {rank[user]}
-                      <Award place={index} />
-                    </Td>
+        {rankings ? (
+          <>
+            <TableContainer>
+              <Table variant="simple">
+                <Thead>
+                  <Tr>
+                    <Th>Person</Th>
+                    <Th>Points</Th>
                   </Tr>
-                );
-              })}
-            </Tbody>
-          </Table>
-        </TableContainer>
+                </Thead>
+                <Tbody>
+                  {rankings.map((rank, index) => {
+                    const user = Object.keys(rank);
+                    return (
+                      <Tr>
+                        <Td>{user}</Td>
+                        <Td>
+                          {/* @ts-ignore */}
+                          {rank[user]}
+                          <Award place={index} />
+                        </Td>
+                      </Tr>
+                    );
+                  })}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </>
+        ) : (
+          <LoaderContainer>
+            <Loader />
+          </LoaderContainer>
+        )}
       </Page>
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async (_context) => {
-  let rankings = await getLeaderboard();
-  const ranks = [];
-  for (const [user, values] of Object.entries(rankings)) {
-    let points = 0;
-    // @ts-ignore
-    for (const [_date, activities] of Object.entries(values)) {
-      // @ts-ignore
-      const filtered = filterObject(activities, (val, key) => val.completed);
-      // @ts-ignore
-      Object.keys(filtered).forEach((key) => {
-        // add up all the keys here
-        points += ACTIVITIES[key].points;
-      });
-    }
-    ranks.push({ [user]: points });
-  }
-  ranks.sort((a, b) => Object.values(b)[0] - Object.values(a)[0]);
-  return {
-    props: {
-      rankings: ranks,
-    },
-  };
-};

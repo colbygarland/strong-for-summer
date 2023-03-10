@@ -1,6 +1,5 @@
 import { Textarea } from '@chakra-ui/react';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { Button } from '../components/Button';
 import { FormBlock, Label } from '../components/forms/shared';
 import { Header } from '../components/Header';
@@ -14,7 +13,6 @@ export default function AddQuote() {
     if (quote !== '') {
       setQuote(quote);
       setQ('');
-      toast.success('Thanks! It has been added!');
     }
   }
 

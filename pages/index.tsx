@@ -9,7 +9,6 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
-import { GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
 import { HiCalendar } from 'react-icons/hi';
 import styled from 'styled-components';
@@ -18,7 +17,6 @@ import { Header } from '../components/Header';
 import { Page } from '../components/Page';
 import { Quote } from '../components/Quote';
 import { getActivity, setActivity } from '../services/api/activity';
-import { getQuotes } from '../services/api/quote';
 import { colors } from '../theme/colors';
 import { from } from '../theme/mediaQueries';
 import { getCurrentDate, getCurrentDatePretty } from '../utils/date';
@@ -82,7 +80,7 @@ function Activity({ children, date }: { children: string; date: string }) {
   );
 }
 
-export default function Home({ quote }: { quote: any }) {
+export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [date, setDate] = useState(getCurrentDate());
   const prettyDate = getCurrentDatePretty(date);
@@ -91,7 +89,7 @@ export default function Home({ quote }: { quote: any }) {
     <>
       <Header leftActionButton={<Calendar onClick={onOpen} />} pageTitle="Strong For Summer 💪" />
       <Page>
-        {quote && <Quote quote={quote} />}
+        <Quote />
         <H2 onClick={onOpen}>{prettyDate}</H2>
         <Row>
           <Group>
@@ -147,14 +145,3 @@ export default function Home({ quote }: { quote: any }) {
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async (_context) => {
-  let quotes = await getQuotes();
-  quotes = Object.values(quotes);
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  return {
-    props: {
-      quote,
-    },
-  };
-};
