@@ -1,5 +1,6 @@
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { Header } from '../components/Header';
 import { Page } from '../components/Page';
 import { ACTIVITIES, getLeaderboard } from '../services/api/activity';
@@ -7,6 +8,29 @@ import { ACTIVITIES, getLeaderboard } from '../services/api/activity';
 // @ts-ignore
 function filterObject(obj, cb) {
   return Object.fromEntries(Object.entries(obj).filter(([key, val]) => cb(val, key)));
+}
+
+const StyledAward = styled.span`
+  display: inline-block;
+  margin-left: 6px;
+`;
+
+function Award({ place }: { place: number }) {
+  let emoji = '';
+  switch (place) {
+    case 0:
+      emoji = '🥇';
+      break;
+    case 1:
+      emoji = '🥈';
+      break;
+    case 2:
+      emoji = '🥉';
+      break;
+    default:
+  }
+
+  return <StyledAward>{emoji}</StyledAward>;
 }
 
 export default function Leaderboard() {
@@ -47,7 +71,7 @@ export default function Leaderboard() {
               </Tr>
             </Thead>
             <Tbody>
-              {rankings.map((rank) => {
+              {rankings.map((rank, index) => {
                 const user = Object.keys(rank);
                 return (
                   <Tr>
@@ -55,6 +79,7 @@ export default function Leaderboard() {
                     <Td>
                       {/* @ts-ignore */}
                       {rank[user]}
+                      <Award place={index} />
                     </Td>
                   </Tr>
                 );
