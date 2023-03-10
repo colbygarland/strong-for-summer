@@ -90,5 +90,6 @@ export const getStaticProps: GetStaticProps = async (_context) => {
     props: {
       rankings: ranks,
     },
+    revalidate: 10,
   };
 };

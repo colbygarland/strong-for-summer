@@ -156,5 +156,6 @@ export const getStaticProps: GetStaticProps = async (_context) => {
     props: {
       quote,
     },
+    revalidate: 10,
   };
 };
