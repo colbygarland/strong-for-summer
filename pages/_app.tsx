@@ -5,8 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { GlobalStyle } from '../theme/global';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import { colors } from '../theme/colors';
+import { createGlobalStyle } from 'styled-components';
 import { Cookie, Montserrat } from 'next/font/google';
 
 const cookie = Cookie({ weight: '400', subsets: ['latin'] });
