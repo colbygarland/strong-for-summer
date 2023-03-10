@@ -31,8 +31,24 @@ export const getCurrentDatePretty = (date: string) => {
   const d = date.split('-');
   // @ts-ignore
   const month = monthNames[d[1] - 1];
+  let emoji = '';
+  switch (month) {
+    case 'March':
+      emoji = '🌷';
+      break;
+    case 'April':
+      emoji = '🌺';
+      break;
+    case 'May':
+      emoji = '🐝';
+      break;
+    case 'June':
+      emoji = '☀️';
+      break;
+    default:
+  }
   const day = parseInt(d[2]);
-  return `${month} ${day}`;
+  return `${emoji} ${month} ${day}`;
 };
 
 export const getCurrentMonth = () => {
