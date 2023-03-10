@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getQuotes } from '../services/api/quote';
 import { colors } from '../theme/colors';
 
 const StyledQuote = styled.blockquote`
@@ -19,6 +21,15 @@ const StyledQuote = styled.blockquote`
   }
 `;
 
-export const Quote = ({ quote }: { quote: any }) => {
+export const Quote = () => {
+  const [quote, setQuote] = useState('');
+
+  useEffect(() => {
+    getQuotes().then((resp) => {
+      const quotes: string[] = Object.values(resp);
+      setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+    });
+  }, []);
+
   return <StyledQuote>{quote}</StyledQuote>;
 };
