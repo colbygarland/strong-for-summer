@@ -101,7 +101,7 @@ export default function Home() {
             <Activity date={date}>💦 8 cups of water</Activity>
             <Activity date={date}>🏃‍♂️ 10,000 steps</Activity>
             <Activity date={date}>🥗 3 servings of vegetables</Activity>
-            <Activity date={date}>🧘 Activity or class</Activity>
+            <Activity date={date}>🧘 45 minute activity or class</Activity>
           </Group>
           <Group>
             <H3>5 Points</H3>
