@@ -32,7 +32,8 @@ export const getCurrentDatePretty = (date: string) => {
   // @ts-ignore
   const month = monthNames[d[1] - 1];
   const day = parseInt(d[2]);
-  return `${month} ${day}`;
+  const emoji = '🌷';
+  return `${emoji} ${month} ${day}`;
 };
 
 export const getCurrentMonth = () => {
