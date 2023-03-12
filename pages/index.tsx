@@ -72,6 +72,15 @@ function Activity({ children, date }: { children: string; date: string }) {
         onChange={(e) => {
           setChecked(e.target.checked);
           setActivity(children, date, e.target.checked);
+
+          // Ensure only one is ever checked
+          if (children === '🏃‍♂️ 10,000 steps') {
+            setActivity('🏃‍♂️ 7,000 steps', date, false);
+          }
+          if (children === '💦 8 cups of water') {
+            console.log('setting 4 cups unchecked');
+            setActivity('💦 4 cups of water', date, false);
+          }
         }}
       >
         {checked ? <Span>{children}</Span> : children}
