@@ -14,7 +14,7 @@ export const ACTIVITIES = {
   '🥗 3 servings of vegetables': {
     points: 10,
   },
-  '🧘 Activity or class': {
+  '🧘 45 minute activity or class': {
     points: 10,
   },
   '💦 4 cups of water': {
