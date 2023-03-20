@@ -97,7 +97,7 @@ export const Header = ({
 
   useEffect(() => {
     const user = getUser();
-    if (user === 'Colby' || user === 'Robyn') {
+    if (user === 'Colby' || user === 'Robyn' || user === 'Robyn ') {
       setShowAdminPage(true);
     }
   }, []);
