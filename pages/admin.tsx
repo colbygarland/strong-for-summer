@@ -35,6 +35,8 @@ export default function Admin({ activities }: { activities: any }) {
               {headings.map((name, index) => {
                 const acts = body[index]
                   ? Object.entries(body[index])
+                      // @ts-ignore
+                      .filter((e) => e[1].completed)
                       .map((e) => e.toString())
                       .join('<br /> ')
                       .replaceAll(',[object Object]', '')
