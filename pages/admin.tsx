@@ -2,12 +2,15 @@ import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/reac
 import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import { Header } from '../components/Header';
-import { Page } from '../components/Page';
-import { getActivityDetailsByUser } from '../services/api/activity';
+import { ACTIVITIES, getActivityDetailsByUser } from '../services/api/activity';
 import { getCurrentDate } from '../utils/date';
 
 const Name = styled(Td)`
   text-transform: capitalize;
+`;
+
+const StyledPage = styled.div`
+  margin-top: 90px;
 `;
 
 export default function Admin({ activities }: { activities: any }) {
@@ -22,7 +25,7 @@ export default function Admin({ activities }: { activities: any }) {
   return (
     <>
       <Header pageTitle="Admin" />
-      <Page>
+      <StyledPage>
         <TableContainer>
           <Table variant="simple">
             <Thead>
@@ -33,23 +36,35 @@ export default function Admin({ activities }: { activities: any }) {
             </Thead>
             <Tbody>
               {headings.map((name, index) => {
+                let totalForToday = 0;
                 const acts = body[index]
                   ? Object.entries(body[index])
                       // @ts-ignore
                       .filter((e) => e[1].completed)
-                      .map((e) => e.toString())
+                      .map((e) => {
+                        totalForToday += ACTIVITIES[e[0]].points;
+                        return e.toString();
+                      })
                       .join('<br /> ')
                       .replaceAll(',[object Object]', '')
                   : null;
 
                 return (
-                  <Tr>
+                  <Tr key={index}>
                     <Name>
                       <strong>{name}</strong>
                     </Name>
                     <Td>
-                      {' '}
-                      {body[index] === null ? '-' : <span dangerouslySetInnerHTML={{ __html: acts as string }} />}
+                      {body[index] === null ? (
+                        '-'
+                      ) : (
+                        <>
+                          <span dangerouslySetInnerHTML={{ __html: acts as string }} />
+                          <br />
+                          <br />
+                          Today's points so far: <strong>{totalForToday}</strong>
+                        </>
+                      )}
                     </Td>
                   </Tr>
                 );
@@ -57,18 +72,20 @@ export default function Admin({ activities }: { activities: any }) {
             </Tbody>
           </Table>
         </TableContainer>
-      </Page>
+      </StyledPage>
     </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (_context) => {
   const date = getCurrentDate();
-  const bre = await getActivityDetailsByUser('Bre', date);
-  const colby = await getActivityDetailsByUser('Colby', date);
-  const danica = await getActivityDetailsByUser('Danica', date);
-  const harry = await getActivityDetailsByUser('Harry', date);
-  const robyn = await getActivityDetailsByUser('Robyn', date);
+  const [bre, colby, danica, harry, robyn] = await Promise.all([
+    getActivityDetailsByUser('Bre', date),
+    getActivityDetailsByUser('Colby', date),
+    getActivityDetailsByUser('Danica', date),
+    getActivityDetailsByUser('Harry', date),
+    getActivityDetailsByUser('Robyn', date),
+  ]);
 
   return {
     props: {
