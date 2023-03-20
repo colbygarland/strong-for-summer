@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { zIndex } from '../theme/zIndex';
 import { typography } from '../theme/typography';
 import Link from 'next/link';
+import { getUser } from '../utils/user';
 
 const Container = styled.header`
   background: ${colors.primary};
@@ -92,6 +93,14 @@ export const Header = ({
   onTitleClick?: () => void;
 }) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [showAdminPage, setShowAdminPage] = useState(false);
+
+  useEffect(() => {
+    const user = getUser();
+    if (user === 'Colby' || user === 'Robyn') {
+      setShowAdminPage(true);
+    }
+  }, []);
 
   return (
     <Container>
@@ -110,6 +119,11 @@ export const Header = ({
           <MenuItem>
             <Link href="/add-quote">Add a Quote</Link>
           </MenuItem>
+          {showAdminPage && (
+            <MenuItem>
+              <Link href="/admin">Admin</Link>
+            </MenuItem>
+          )}
         </MenuList>
       </Menu>
     </Container>

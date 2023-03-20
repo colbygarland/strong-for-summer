@@ -55,6 +55,15 @@ export const getActivity = async (name: string, date: string) => {
   }
 };
 
+export const getActivityDetailsByUser = async (user: string, date: string) => {
+  const snapshot = await get(child(ref(db), `/activities/${user}/${date}`));
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    return null;
+  }
+};
+
 export const setActivity = async (name: string, date: string, completed: boolean) => {
   const user = getUser();
   set(ref(db, `/activities/${user}/${date}/${name}`), {
