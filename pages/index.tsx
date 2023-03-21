@@ -1,19 +1,10 @@
-import {
-  Checkbox,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Checkbox, useDisclosure } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 import { HiCalendar } from 'react-icons/hi';
 import styled from 'styled-components';
-import { FormBlock, Label } from '../components/forms/shared';
+import { DatePickerModal } from '../components/DatePickerModal';
+import { FormBlock } from '../components/forms/shared';
 import { Header } from '../components/Header';
 import { Page } from '../components/Page';
 import { Quote } from '../components/Quote';
@@ -133,26 +124,7 @@ export default function Home({ quote }: { quote: string }) {
           </Group>
         </Row>
       </Page>
-      <Modal isOpen={isOpen} onClose={onClose} size="sm">
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Change the date</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <FormBlock>
-              <Label>Date</Label>
-              <Input
-                value={date}
-                type="date"
-                onChange={(e) => {
-                  setDate(e.target.value);
-                  onClose();
-                }}
-              />
-            </FormBlock>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <DatePickerModal date={date} setDate={setDate} isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
