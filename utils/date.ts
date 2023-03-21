@@ -27,13 +27,27 @@ export const getCurrentDate = () => {
   return formatDate(getNow());
 };
 
+const getEmoji = (month: string) => {
+  switch (month) {
+    case 'March':
+      return '🌷';
+    case 'April':
+      return '🌺';
+    case 'May':
+      return '🐝';
+    case 'June':
+      return '☀️';
+    default:
+      return '';
+  }
+};
+
 export const getCurrentDatePretty = (date: string) => {
   const d = date.split('-');
   // @ts-ignore
   const month = monthNames[d[1] - 1];
   const day = parseInt(d[2]);
-  const emoji = '🌷';
-  return `${emoji} ${month} ${day}`;
+  return `${getEmoji(month)} ${month} ${day}`;
 };
 
 export const getCurrentMonth = () => {

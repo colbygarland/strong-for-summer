@@ -1,17 +1,16 @@
-import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
+import { TableContainer, Table, Thead, Tr, Th, Tbody, Td, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { HiCalendar } from 'react-icons/hi';
 import styled from 'styled-components';
+import { DatePickerModal } from '../components/DatePickerModal';
 import { Header } from '../components/Header';
 import { Loader } from '../components/Loader';
+import { Page } from '../components/Page';
 import { ACTIVITIES, getActivityDetailsByUser } from '../services/api/activity';
-import { getCurrentDate } from '../utils/date';
+import { getCurrentDate, getCurrentDatePretty } from '../utils/date';
 
 const Name = styled(Td)`
   text-transform: capitalize;
-`;
-
-const StyledPage = styled.div`
-  margin-top: 90px;
 `;
 
 const LoadingContainer = styled.div`
@@ -21,14 +20,26 @@ const LoadingContainer = styled.div`
   width: 100vw;
 `;
 
+const Calendar = styled(HiCalendar).attrs({ size: 24 })`
+  cursor: pointer;
+`;
+
+const H2 = styled.h2`
+  font-size: 32px;
+  margin-bottom: 15px;
+  font-weight: 700;
+`;
+
 export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [headings, setHeadings] = useState<string[]>([]);
   const [body, setBody] = useState<string[]>([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [date, setDate] = useState(getCurrentDate());
+  const prettyDate = getCurrentDatePretty(date);
 
   useEffect(() => {
     const getActivities = async () => {
-      const date = getCurrentDate();
       const [bre, colby, danica, harry, robyn] = await Promise.all([
         getActivityDetailsByUser('Bre', date),
         getActivityDetailsByUser('Colby', date),
@@ -54,7 +65,7 @@ export default function Admin() {
       setLoading(false);
     };
     getActivities();
-  }, []);
+  }, [date]);
 
   if (loading) {
     return (
@@ -66,8 +77,9 @@ export default function Admin() {
 
   return (
     <>
-      <Header pageTitle="Admin" />
-      <StyledPage>
+      <Header pageTitle="Admin" leftActionButton={<Calendar onClick={onOpen} />} />
+      <Page>
+        <H2 onClick={onOpen}>{prettyDate}</H2>
         <TableContainer>
           <Table variant="simple">
             <Thead>
@@ -114,7 +126,8 @@ export default function Admin() {
             </Tbody>
           </Table>
         </TableContainer>
-      </StyledPage>
+      </Page>
+      <DatePickerModal date={date} setDate={setDate} isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
