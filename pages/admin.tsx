@@ -14,6 +14,7 @@ const StyledPage = styled.div`
 `;
 
 export default function Admin({ activities }: { activities: any }) {
+  console.log(activities);
   const headings = [];
   const body: any[] = [];
 
