@@ -29,7 +29,7 @@ export default function Admin({ activities }: { activities: any }) {
     setHeadings(hs);
     // @ts-ignore
     setBody(b);
-  }, []);
+  }, [activities]);
 
   return (
     <>
