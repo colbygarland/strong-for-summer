@@ -1,7 +1,8 @@
 import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Header } from '../components/Header';
+import { Loader } from '../components/Loader';
 import { ACTIVITIES, getActivityDetailsByUser } from '../services/api/activity';
 import { getCurrentDate } from '../utils/date';
 
@@ -13,14 +14,54 @@ const StyledPage = styled.div`
   margin-top: 90px;
 `;
 
-export default function Admin({ activities }: { activities: any }) {
-  console.log(activities);
-  const headings = [];
-  const body: any[] = [];
+const LoadingContainer = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+`;
 
-  for (const acts in activities) {
-    headings.push(acts);
-    body.push(activities[acts]);
+export default function Admin() {
+  const [loading, setLoading] = useState(true);
+  const [headings, setHeadings] = useState<string[]>([]);
+  const [body, setBody] = useState<string[]>([]);
+
+  useEffect(() => {
+    const getActivities = async () => {
+      const date = getCurrentDate();
+      const [bre, colby, danica, harry, robyn] = await Promise.all([
+        getActivityDetailsByUser('Bre', date),
+        getActivityDetailsByUser('Colby', date),
+        getActivityDetailsByUser('Danica', date),
+        getActivityDetailsByUser('Harry', date),
+        getActivityDetailsByUser('Robyn', date),
+      ]);
+      const activities = {
+        bre,
+        colby,
+        danica,
+        harry,
+        robyn,
+      };
+      const h = [];
+      const b = [];
+      for (const acts in activities) {
+        h.push(acts);
+        b.push(activities[acts]);
+      }
+      setHeadings(h);
+      setBody(b);
+      setLoading(false);
+    };
+    getActivities();
+  }, []);
+
+  if (loading) {
+    return (
+      <LoadingContainer>
+        <Loader />
+      </LoadingContainer>
+    );
   }
 
   return (
@@ -77,26 +118,3 @@ export default function Admin({ activities }: { activities: any }) {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (_context) => {
-  const date = getCurrentDate();
-  const [bre, colby, danica, harry, robyn] = await Promise.all([
-    getActivityDetailsByUser('Bre', date),
-    getActivityDetailsByUser('Colby', date),
-    getActivityDetailsByUser('Danica', date),
-    getActivityDetailsByUser('Harry', date),
-    getActivityDetailsByUser('Robyn', date),
-  ]);
-
-  return {
-    props: {
-      activities: {
-        bre,
-        colby,
-        danica,
-        harry,
-        robyn,
-      },
-    },
-  };
-};
