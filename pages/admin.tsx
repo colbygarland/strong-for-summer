@@ -1,5 +1,6 @@
 import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Header } from '../components/Header';
 import { ACTIVITIES, getActivityDetailsByUser } from '../services/api/activity';
@@ -14,13 +15,21 @@ const StyledPage = styled.div`
 `;
 
 export default function Admin({ activities }: { activities: any }) {
-  const headings = [];
-  const body: any[] = [];
+  const [headings, setHeadings] = useState([]);
+  const [body, setBody] = useState([]);
 
-  for (const acts in activities) {
-    headings.push(acts);
-    body.push(activities[acts]);
-  }
+  useEffect(() => {
+    const hs = [];
+    const b = [];
+    for (const acts in activities) {
+      hs.push(acts);
+      b.push(activities[acts]);
+    }
+    // @ts-ignore
+    setHeadings(hs);
+    // @ts-ignore
+    setBody(b);
+  }, []);
 
   return (
     <>
