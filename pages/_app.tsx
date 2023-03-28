@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { Cookie, Montserrat } from 'next/font/google';
+import { VERIFIED_NAMES } from '../utils/user';
 
 const cookie = Cookie({ weight: '400', subsets: ['latin'] });
 const montserrat = Montserrat({ weight: ['400', '700'], subsets: ['latin'] });
@@ -24,7 +25,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
-      router.replace('/enter-name');
+      router.replace('/unauthorized');
+    } else {
+      if (!VERIFIED_NAMES.includes(user)) {
+        router.replace('/unauthorized');
+      }
     }
   }, []);
 
