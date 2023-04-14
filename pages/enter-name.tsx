@@ -6,6 +6,7 @@ import { Button } from '../components/Button';
 import { FormBlock, Label } from '../components/forms/shared';
 import { Loader } from '../components/Loader';
 import { colors } from '../theme/colors';
+import { VERIFIED_NAMES } from '../utils/user';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -39,7 +40,7 @@ export default function EnterName() {
 
   useEffect(() => {
     const user = localStorage.getItem('user');
-    if (user) {
+    if (user && VERIFIED_NAMES.includes(user)) {
       router.replace('/');
     }
   }, []);
@@ -49,7 +50,11 @@ export default function EnterName() {
     console.log(localStorage.getItem('user'));
     setLoading(true);
     setTimeout(() => {
-      router.replace('/');
+      if (VERIFIED_NAMES.includes(name)) {
+        router.replace('/');
+      } else {
+        router.replace('/unauthorized');
+      }
     }, 2000);
   };
 

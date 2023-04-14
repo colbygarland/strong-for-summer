@@ -3,10 +3,10 @@ import { PageHead } from '../components/PageHead';
 import '../services/firebase';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GlobalStyle } from '../theme/global';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { Cookie, Montserrat } from 'next/font/google';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { VERIFIED_NAMES } from '../utils/user';
 
 const cookie = Cookie({ weight: '400', subsets: ['latin'] });
@@ -25,10 +25,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
-      router.replace('/unauthorized');
+      router.replace('/enter-name');
     } else {
-      if (!VERIFIED_NAMES.includes(user)) {
-        router.replace('/unauthorized');
+      if (VERIFIED_NAMES.includes(user)) {
+        router.replace('/');
       }
     }
   }, []);
