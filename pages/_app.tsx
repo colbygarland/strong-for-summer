@@ -3,11 +3,8 @@ import { PageHead } from '../components/PageHead';
 import '../services/firebase';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GlobalStyle } from '../theme/global';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { Cookie, Montserrat } from 'next/font/google';
-import { VERIFIED_NAMES } from '../utils/user';
 
 const cookie = Cookie({ weight: '400', subsets: ['latin'] });
 const montserrat = Montserrat({ weight: ['400', '700'], subsets: ['latin'] });
@@ -20,18 +17,18 @@ const Fonts = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (!user) {
-      // router.replace('/unauthorized');
-    } else {
-      if (!VERIFIED_NAMES.includes(user)) {
-        router.replace('/unauthorized');
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   const user = localStorage.getItem('user');
+  //   if (!user) {
+  //     router.replace('/unauthorized');
+  //   } else {
+  //     if (!VERIFIED_NAMES.includes(user)) {
+  //       router.replace('/unauthorized');
+  //     }
+  //   }
+  // }, []);
 
   return (
     <>
