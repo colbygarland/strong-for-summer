@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user) {
-      router.replace('/unauthorized');
+      // router.replace('/unauthorized');
     } else {
       if (!VERIFIED_NAMES.includes(user)) {
         router.replace('/unauthorized');
