@@ -37,6 +37,12 @@ const getEmoji = (month: string) => {
       return '🐝';
     case 'June':
       return '☀️';
+    case 'October':
+      return '🎃👻';
+    case 'November':
+      return '🍂';
+    case 'December':
+      return '🎄🎅';
     default:
       return '';
   }
