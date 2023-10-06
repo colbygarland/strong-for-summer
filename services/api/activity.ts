@@ -2,7 +2,7 @@ import { child, get, ref, set, getDatabase } from 'firebase/database';
 import { getUser } from '../../utils/user';
 
 export const ACTIVITIES = {
-  '🏋️ 45 minute workout': {
+  '🏋️ 30 minute workout': {
     points: 20,
   },
   '💦 8 cups of water': {
@@ -11,10 +11,10 @@ export const ACTIVITIES = {
   '🏃‍♂️ 10,000 steps': {
     points: 10,
   },
-  '🥗 3 servings of vegetables': {
+  '🥗 3 servings of fruit or vegetables': {
     points: 10,
   },
-  '🧘 45 minute activity or class': {
+  '🧘 30 minute activity or class': {
     points: 10,
   },
   '💦 4 cups of water': {
