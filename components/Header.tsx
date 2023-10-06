@@ -25,10 +25,12 @@ const Container = styled.header`
 const Title = styled.h2`
   font-size: 22px;
   font-weight: 700;
+  color: ${colors.white};
 `;
 
 const MenuButton = styled(HiOutlineMenuAlt3).attrs({ size: 30 })`
   fill: ${colors.white};
+  stroke: ${colors.white};
   position: absolute;
   right: 20px;
   top: 15px;
@@ -39,6 +41,10 @@ const LeftActionButton = styled.span`
   position: absolute;
   left: 20px;
   top: 20px;
+  path {
+    fill: ${colors.white};
+    stroke: ${colors.white};
+  }
 `;
 
 const Menu = styled.div<{ show?: boolean }>`

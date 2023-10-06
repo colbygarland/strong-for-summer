@@ -13,6 +13,7 @@ import { getQuotes } from '../services/api/quote';
 import { colors } from '../theme/colors';
 import { from } from '../theme/mediaQueries';
 import { getCurrentDate, getCurrentDatePretty } from '../utils/date';
+import { SITE_TITLE } from '../strings';
 
 const H2 = styled.h2`
   font-size: 32px;
@@ -89,7 +90,7 @@ export default function Home({ quote }: { quote: string }) {
 
   return (
     <>
-      <Header leftActionButton={<Calendar onClick={onOpen} />} pageTitle="Strong For Summer 💪" />
+      <Header leftActionButton={<Calendar onClick={onOpen} />} pageTitle={`${SITE_TITLE} 💪`} />
       <Page>
         <Quote quote={quote} />
         <H2 onClick={onOpen}>{prettyDate}</H2>
