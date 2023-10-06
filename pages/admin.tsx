@@ -9,6 +9,10 @@ import { Page } from '../components/Page';
 import { ACTIVITIES, getActivityDetailsByUser } from '../services/api/activity';
 import { getCurrentDate, getCurrentDatePretty } from '../utils/date';
 
+const Container = styled.div`
+  padding-top: 20px;
+`;
+
 const Name = styled(Td)`
   text-transform: capitalize;
 `;
@@ -79,53 +83,55 @@ export default function Admin() {
     <>
       <Header pageTitle="Admin" leftActionButton={<Calendar onClick={onOpen} />} />
       <Page>
-        <H2 onClick={onOpen}>{prettyDate}</H2>
-        <TableContainer>
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Person</Th>
-                <Th>Activity for Today</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {headings.map((name, index) => {
-                let totalForToday = 0;
-                const acts = body[index]
-                  ? Object.entries(body[index])
-                      // @ts-ignore
-                      .filter((e) => e[1].completed)
-                      .map((e) => {
-                        totalForToday += ACTIVITIES[e[0]].points;
-                        return e.toString();
-                      })
-                      .join('<br /> ')
-                      .replaceAll(',[object Object]', '')
-                  : null;
+        <Container>
+          <H2 onClick={onOpen}>{prettyDate}</H2>
+          <TableContainer>
+            <Table variant="simple">
+              <Thead>
+                <Tr>
+                  <Th>Person</Th>
+                  <Th>Activity for Today</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {headings.map((name, index) => {
+                  let totalForToday = 0;
+                  const acts = body[index]
+                    ? Object.entries(body[index])
+                        // @ts-ignore
+                        .filter((e) => e[1].completed)
+                        .map((e) => {
+                          totalForToday += ACTIVITIES[e[0]].points;
+                          return e.toString();
+                        })
+                        .join('<br /> ')
+                        .replaceAll(',[object Object]', '')
+                    : null;
 
-                return (
-                  <Tr key={index}>
-                    <Name>
-                      <strong>{name}</strong>
-                    </Name>
-                    <Td>
-                      {body[index] === null ? (
-                        '-'
-                      ) : (
-                        <>
-                          <span dangerouslySetInnerHTML={{ __html: acts as string }} />
-                          <br />
-                          <br />
-                          Today's points so far: <strong>{totalForToday}</strong>
-                        </>
-                      )}
-                    </Td>
-                  </Tr>
-                );
-              })}
-            </Tbody>
-          </Table>
-        </TableContainer>
+                  return (
+                    <Tr key={index}>
+                      <Name>
+                        <strong>{name}</strong>
+                      </Name>
+                      <Td>
+                        {body[index] === null ? (
+                          '-'
+                        ) : (
+                          <>
+                            <span dangerouslySetInnerHTML={{ __html: acts as string }} />
+                            <br />
+                            <br />
+                            Today's points so far: <strong>{totalForToday}</strong>
+                          </>
+                        )}
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Container>
       </Page>
       <DatePickerModal date={date} setDate={setDate} isOpen={isOpen} onClose={onClose} />
     </>

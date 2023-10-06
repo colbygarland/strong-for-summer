@@ -20,6 +20,7 @@ const Container = styled.header`
   left: 0;
   width: 100%;
   z-index: 100;
+  height: 63px;
 `;
 
 const Title = styled.h2`
@@ -53,7 +54,7 @@ const Menu = styled.div<{ show?: boolean }>`
   inset: 0;
   height: 100%;
   width: 100%;
-  background: ${colors.white};
+  background: ${colors.slate};
   color: ${colors.secondary};
   z-index: ${zIndex[50]};
   padding: ${spacing.lg};

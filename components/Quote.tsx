@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { colors } from '../theme/colors';
 
 const StyledQuote = styled.blockquote`
+  margin-left: -20px;
+  margin-right: -20px;
   position: relative;
+  z-index: 1;
   padding: 20px;
   margin-bottom: 20px;
   color: ${colors.white};
@@ -14,7 +17,6 @@ const StyledQuote = styled.blockquote`
     left: 0;
     height: 100%;
     width: 100%;
-    border-radius: 10px;
     z-index: -1;
   }
 `;
