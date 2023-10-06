@@ -7,6 +7,7 @@ const Container = styled.div`
   margin-top: 63px;
   background-color: ${colors.slate};
   min-height: 100vh;
+  padding-bottom: 20px;
 `;
 
 export const Page = ({ children }: { children: React.ReactNode }) => {
