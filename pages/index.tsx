@@ -113,7 +113,7 @@ export default function Home({ quote }: { quote: string }) {
             <Activity date={date}>🧘 5 minutes of meditation</Activity>
             <Activity date={date}>📖 Read 10 pages of a book</Activity>
             <Activity date={date}>💤 Get 8 hours of sleep</Activity>
-            <Activity date={date}>💪 Hit your protein goal</Activity>
+            <Activity date={date}>💪 3 servings of protein</Activity>
           </Group>
           <Group>
             <H3>2 Points</H3>

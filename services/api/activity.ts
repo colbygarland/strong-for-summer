@@ -32,7 +32,7 @@ export const ACTIVITIES = {
   '💤 Get 8 hours of sleep': {
     points: 5,
   },
-  '💪 Hit your protein goal': {
+  '💪 3 servings of protein': {
     points: 5,
   },
   '🛏️ Make the bed': {
