@@ -49,7 +49,7 @@ export default function Admin() {
         getActivityDetailsByUser('Colby', date),
         getActivityDetailsByUser('Danica', date),
         getActivityDetailsByUser('Harry', date),
-        getActivityDetailsByUser('Robyn ', date),
+        getActivityDetailsByUser('Robyn', date),
       ]);
       const activities = {
         bre,
